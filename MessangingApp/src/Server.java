@@ -60,15 +60,9 @@ public class Server implements Runnable {
                     }
                     if (findUserSocket(recieverPort)!=null){
                         ClientHandler reciever = findUserSocket(recieverPort);
-                        System.out.println(msg);
-                        System.out.println(reciever);
-                        reciever.out.println(msg);
+                        reciever.out.println(msg + ">" + this.user_port);
                     }
                 }
-                done = true;
-                in.close();
-                out.close();
-                client.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -29,6 +29,18 @@ public class UserInfoData {
         return "no port";
     }
 
+    public static String find_name(String port) throws SQLException {
+        String sql = "SELECT username AS username " +
+                "FROM users WHERE port = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, port);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return rs.getString("username");
+        }
+        return "no name";
+    }
+
     public static boolean check_credentials(String username, String password) throws SQLException {
         String sql = "SELECT password AS pass FROM login_schema.users WHERE username = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
